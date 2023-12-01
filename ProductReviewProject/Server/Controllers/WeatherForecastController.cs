@@ -4,7 +4,7 @@ using ProductReviewProject.Shared;
 
 namespace ProductReviewProject.Server.Controllers
 {
-	[Authorize]
+	//[Authorize]
 	[ApiController]
 	[Route("[controller]")]
 	public class WeatherForecastController : ControllerBase

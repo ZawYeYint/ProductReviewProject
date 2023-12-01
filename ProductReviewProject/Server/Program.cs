@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using ProductReviewProject.Server.Data;
 using ProductReviewProject.Server.Models;
 using Microsoft.AspNetCore.Identity;
+using ProductReviewProject.Server.IRepository;
+using ProductReviewProject.Server.Repository;
+using CarRentalManagement.Server.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +28,8 @@ builder.Services.AddAuthentication()
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
