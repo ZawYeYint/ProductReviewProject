@@ -12,7 +12,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace CarRentalManagement.Server.Repository
+namespace ProductReviewProject.Server.Repository
 {
 	public class UnitOfWork : IUnitOfWork
 	{
@@ -40,8 +40,7 @@ namespace CarRentalManagement.Server.Repository
 			=> _staffs ??= new GenericRepository<Staff>(_context);
 		public IGenericRepository<Rating> Ratings
 			=> _ratings ??= new GenericRepository<Rating>(_context);
-		public IGenericRepository<Customer> Customers
-			=> _customers ??= new GenericRepository<Customer>(_context);
+		
 
 		public void Dispose()
 		{

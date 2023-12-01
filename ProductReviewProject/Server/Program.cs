@@ -8,6 +8,7 @@ using ProductReviewProject.Server.IRepository;
 using ProductReviewProject.Server.Repository;
 using CarRentalManagement.Server.Repository;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -26,10 +27,12 @@ builder.Services.AddIdentityServer()
 builder.Services.AddAuthentication()
 	.AddIdentityServerJwt();
 
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
-builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+
 
 var app = builder.Build();
 
