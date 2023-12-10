@@ -1,9 +1,93 @@
 ﻿@page "/"
 
 <PageTitle>Index</PageTitle>
+<style>
+	table, th, td 
+	{
+		border: 1px solid black;
+		border-collapse: collapse;
+		width: 100%;
+	}
 
-<h1>Hello, world!</h1>
+	h1 
+	{
+		color: palegoldenrod;
+		margin-left: 20px;
+	}
+
+	body 
+	{
+		background-color: beige;
+		font-family: "Calibri", "Calibri", monospace;
+	}
+</style>
+
+<h1>Welcome!</h1>
 
 Welcome to our Product Review App.
+<table>
+	<tr>
+		<th>CONTENT</th>
+
+		<th>
+			<NavLink class="nav-link" href="/products" Match="NavLinkMatch.All">
+				<span class="#" aria-hidden="true"></span> Products
+			</NavLink>
+		</th>
+
+		<th>
+			<NavLink class="nav-link" href="/ratings" Match="NavLinkMatch.All">
+				<span class="#" aria-hidden="true"></span> Ratings
+			</NavLink>
+		</th>
+
+		<th>
+			<NavLink class="nav-link" href="#" Match="NavLinkMatch.All">
+				<span class="#" aria-hidden="true"></span> Reviews
+			</NavLink>
+		</th>
+
+		<th>
+			<NavLink class="nav-link" href="#" Match="NavLinkMatch.All">
+				<span class="#" aria-hidden="true"></span> Customers
+			</NavLink>
+		</th>
+
+		<th>
+			<NavLink class="nav-link" href="#" Match="NavLinkMatch.All">
+				<span class="#" aria-hidden="true"></span> Staffs
+			</NavLink>
+		</th>
+	</tr>
+
+	<tr>
+
+	<NavLink class="nav-link" href="/products"  Match="NavLinkMatch.All">
+		<span class="#" aria-hidden="true"></span> Products
+	</NavLink>
+
+	<NavLink class="nav-link" href="/ratings" Match="NavLinkMatch.All">
+		<span class="#" aria-hidden="true"></span> Ratings
+	</NavLink>
+
+	<NavLink class="nav-link" href="#" Match="NavLinkMatch.All">
+		<span class="#" aria-hidden="true"></span> Reviews
+	</NavLink>
+
+	<NavLink class="nav-link" href="#" Match="NavLinkMatch.All">
+		<span class="#" aria-hidden="true"></span> Customers
+	</NavLink>
+
+	<NavLink class="nav-link" href="#" Match="NavLinkMatch.All">
+		<span class="#" aria-hidden="true"></span> Staffs
+	</NavLink>
+	
+
+
+	</tr>
+
+		
+	
+</table>
 
 <SurveyPrompt Title="How is Blazor working for you?" />
