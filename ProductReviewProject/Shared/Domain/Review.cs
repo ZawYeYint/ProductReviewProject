@@ -9,8 +9,11 @@ namespace ProductReviewProject.Shared.Domain
 	public class Review:BaseDomainModel
 	{
 		public string? Description { get; set; }
+
+		public int? ProductId { get; set; }
 		public virtual Product? Product { get; set; }
 
+		public int? CustomerId { get; set; }
 		public virtual Customer? Customer { get; set; }
 	}
 }

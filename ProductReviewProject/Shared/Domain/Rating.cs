@@ -9,10 +9,10 @@ namespace ProductReviewProject.Shared.Domain
 	public class Rating:BaseDomainModel
 	{
 		public string? Description {  get; set; }
-
+		
 		public int Value { get; set; }
 		
-		public virtual Review? Review { get; set; }
+		public int? CustomerId { get; set; }
 
 		public virtual Customer? Customer { get; set; }
 
