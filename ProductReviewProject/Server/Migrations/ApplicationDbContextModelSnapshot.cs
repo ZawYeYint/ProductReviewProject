@@ -396,7 +396,7 @@ namespace ProductReviewProject.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d09bc8df-0d29-49d3-b625-597dd34f7011",
+                            ConcurrencyStamp = "a69fab01-869c-4f62-a52a-d1066bbce33a",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -404,9 +404,9 @@ namespace ProductReviewProject.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEC8tB4fpX7/Mj2wkMt1rIkHlToAPljiWfzoZlNwofl0iiASDbsGVwph2BLuHgAQyLA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPg8uXqWkK8lmWm5pjUOTXQo0pd0iyLDIX1hNdOyYHMjMMt1XxtD0obonGO/DrpVUg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "84fd06e3-07e7-4bd1-80c2-d0b4cf572cd7",
+                            SecurityStamp = "426f2d36-fc2a-4be5-b579-bddf4c6da42f",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -481,8 +481,8 @@ namespace ProductReviewProject.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 11, 30, 20, 22, 44, 309, DateTimeKind.Local).AddTicks(9501),
-                            DateUpdated = new DateTime(2023, 11, 30, 20, 22, 44, 309, DateTimeKind.Local).AddTicks(9511),
+                            DateCreated = new DateTime(2024, 1, 22, 13, 56, 5, 351, DateTimeKind.Local).AddTicks(5970),
+                            DateUpdated = new DateTime(2024, 1, 22, 13, 56, 5, 351, DateTimeKind.Local).AddTicks(5979),
                             Name = "Product1",
                             UpdatedBy = "System"
                         },
@@ -490,8 +490,8 @@ namespace ProductReviewProject.Server.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 11, 30, 20, 22, 44, 309, DateTimeKind.Local).AddTicks(9513),
-                            DateUpdated = new DateTime(2023, 11, 30, 20, 22, 44, 309, DateTimeKind.Local).AddTicks(9514),
+                            DateCreated = new DateTime(2024, 1, 22, 13, 56, 5, 351, DateTimeKind.Local).AddTicks(5981),
+                            DateUpdated = new DateTime(2024, 1, 22, 13, 56, 5, 351, DateTimeKind.Local).AddTicks(5981),
                             Name = "Product2",
                             UpdatedBy = "System"
                         });
@@ -520,9 +520,6 @@ namespace ProductReviewProject.Server.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ReviewId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -533,8 +530,6 @@ namespace ProductReviewProject.Server.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("ReviewId");
-
                     b.ToTable("Ratings");
 
                     b.HasData(
@@ -542,8 +537,8 @@ namespace ProductReviewProject.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 11, 30, 20, 22, 44, 311, DateTimeKind.Local).AddTicks(616),
-                            DateUpdated = new DateTime(2023, 11, 30, 20, 22, 44, 311, DateTimeKind.Local).AddTicks(623),
+                            DateCreated = new DateTime(2024, 1, 22, 13, 56, 5, 352, DateTimeKind.Local).AddTicks(5114),
+                            DateUpdated = new DateTime(2024, 1, 22, 13, 56, 5, 352, DateTimeKind.Local).AddTicks(5120),
                             UpdatedBy = "System",
                             Value = 3
                         },
@@ -551,8 +546,8 @@ namespace ProductReviewProject.Server.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 11, 30, 20, 22, 44, 311, DateTimeKind.Local).AddTicks(626),
-                            DateUpdated = new DateTime(2023, 11, 30, 20, 22, 44, 311, DateTimeKind.Local).AddTicks(627),
+                            DateCreated = new DateTime(2024, 1, 22, 13, 56, 5, 352, DateTimeKind.Local).AddTicks(5122),
+                            DateUpdated = new DateTime(2024, 1, 22, 13, 56, 5, 352, DateTimeKind.Local).AddTicks(5122),
                             UpdatedBy = "System",
                             Value = 4
                         });
@@ -600,8 +595,8 @@ namespace ProductReviewProject.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 11, 30, 20, 22, 44, 312, DateTimeKind.Local).AddTicks(740),
-                            DateUpdated = new DateTime(2023, 11, 30, 20, 22, 44, 312, DateTimeKind.Local).AddTicks(753),
+                            DateCreated = new DateTime(2024, 1, 22, 13, 56, 5, 353, DateTimeKind.Local).AddTicks(3039),
+                            DateUpdated = new DateTime(2024, 1, 22, 13, 56, 5, 353, DateTimeKind.Local).AddTicks(3042),
                             Description = "Good Review",
                             UpdatedBy = "System"
                         },
@@ -609,8 +604,8 @@ namespace ProductReviewProject.Server.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 11, 30, 20, 22, 44, 312, DateTimeKind.Local).AddTicks(760),
-                            DateUpdated = new DateTime(2023, 11, 30, 20, 22, 44, 312, DateTimeKind.Local).AddTicks(761),
+                            DateCreated = new DateTime(2024, 1, 22, 13, 56, 5, 353, DateTimeKind.Local).AddTicks(3043),
+                            DateUpdated = new DateTime(2024, 1, 22, 13, 56, 5, 353, DateTimeKind.Local).AddTicks(3044),
                             Description = "Amazing 10/10",
                             UpdatedBy = "System"
                         });
@@ -704,13 +699,7 @@ namespace ProductReviewProject.Server.Migrations
                         .WithMany()
                         .HasForeignKey("CustomerId");
 
-                    b.HasOne("ProductReviewProject.Shared.Domain.Review", "Review")
-                        .WithMany()
-                        .HasForeignKey("ReviewId");
-
                     b.Navigation("Customer");
-
-                    b.Navigation("Review");
                 });
 
             modelBuilder.Entity("ProductReviewProject.Shared.Domain.Review", b =>

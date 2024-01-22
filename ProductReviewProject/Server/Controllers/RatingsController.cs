@@ -36,7 +36,7 @@ namespace ProductReviewProject.Server.Controllers
 
 		// GET: api/Ratings/5
 		[HttpGet("{id}")]
-		public async Task<ActionResult<Rating>> GetRating(int id)
+		public async Task<ActionResult> GetRating(int id)
 		{
 			var rating = await _unitOfWork.Ratings.Get(q => q.Id == id);
 

@@ -6,7 +6,7 @@ using ProductReviewProject.Server.Models;
 using Microsoft.AspNetCore.Identity;
 using ProductReviewProject.Server.IRepository;
 using ProductReviewProject.Server.Repository;
-using ProductReviewProject.Server.Repository;
+
 
 
 var builder = WebApplication.CreateBuilder(args);

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProductReviewProject.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialDb : Migration
+    public partial class newdb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -273,6 +273,30 @@ namespace ProductReviewProject.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Ratings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Value = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ratings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ratings_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Reviews",
                 columns: table => new
                 {
@@ -301,36 +325,6 @@ namespace ProductReviewProject.Server.Migrations
                         principalColumn: "Id");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Ratings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Value = table.Column<int>(type: "int", nullable: false),
-                    ReviewId = table.Column<int>(type: "int", nullable: true),
-                    CustomerId = table.Column<int>(type: "int", nullable: true),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ratings", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Ratings_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Ratings_Reviews_ReviewId",
-                        column: x => x.ReviewId,
-                        principalTable: "Reviews",
-                        principalColumn: "Id");
-                });
-
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
@@ -343,24 +337,24 @@ namespace ProductReviewProject.Server.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "d09bc8df-0d29-49d3-b625-597dd34f7011", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEC8tB4fpX7/Mj2wkMt1rIkHlToAPljiWfzoZlNwofl0iiASDbsGVwph2BLuHgAQyLA==", null, false, "84fd06e3-07e7-4bd1-80c2-d0b4cf572cd7", false, "admin@localhost.com" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "a69fab01-869c-4f62-a52a-d1066bbce33a", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEPg8uXqWkK8lmWm5pjUOTXQo0pd0iyLDIX1hNdOyYHMjMMt1XxtD0obonGO/DrpVUg==", null, false, "426f2d36-fc2a-4be5-b579-bddf4c6da42f", false, "admin@localhost.com" });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Description", "Name", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "System", new DateTime(2023, 11, 30, 20, 22, 44, 309, DateTimeKind.Local).AddTicks(9501), new DateTime(2023, 11, 30, 20, 22, 44, 309, DateTimeKind.Local).AddTicks(9511), null, "Product1", "System" },
-                    { 2, "System", new DateTime(2023, 11, 30, 20, 22, 44, 309, DateTimeKind.Local).AddTicks(9513), new DateTime(2023, 11, 30, 20, 22, 44, 309, DateTimeKind.Local).AddTicks(9514), null, "Product2", "System" }
+                    { 1, "System", new DateTime(2024, 1, 22, 13, 56, 5, 351, DateTimeKind.Local).AddTicks(5970), new DateTime(2024, 1, 22, 13, 56, 5, 351, DateTimeKind.Local).AddTicks(5979), null, "Product1", "System" },
+                    { 2, "System", new DateTime(2024, 1, 22, 13, 56, 5, 351, DateTimeKind.Local).AddTicks(5981), new DateTime(2024, 1, 22, 13, 56, 5, 351, DateTimeKind.Local).AddTicks(5981), null, "Product2", "System" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Ratings",
-                columns: new[] { "Id", "CreatedBy", "CustomerId", "DateCreated", "DateUpdated", "Description", "ReviewId", "UpdatedBy", "Value" },
+                columns: new[] { "Id", "CreatedBy", "CustomerId", "DateCreated", "DateUpdated", "Description", "UpdatedBy", "Value" },
                 values: new object[,]
                 {
-                    { 1, "System", null, new DateTime(2023, 11, 30, 20, 22, 44, 311, DateTimeKind.Local).AddTicks(616), new DateTime(2023, 11, 30, 20, 22, 44, 311, DateTimeKind.Local).AddTicks(623), null, null, "System", 3 },
-                    { 2, "System", null, new DateTime(2023, 11, 30, 20, 22, 44, 311, DateTimeKind.Local).AddTicks(626), new DateTime(2023, 11, 30, 20, 22, 44, 311, DateTimeKind.Local).AddTicks(627), null, null, "System", 4 }
+                    { 1, "System", null, new DateTime(2024, 1, 22, 13, 56, 5, 352, DateTimeKind.Local).AddTicks(5114), new DateTime(2024, 1, 22, 13, 56, 5, 352, DateTimeKind.Local).AddTicks(5120), null, "System", 3 },
+                    { 2, "System", null, new DateTime(2024, 1, 22, 13, 56, 5, 352, DateTimeKind.Local).AddTicks(5122), new DateTime(2024, 1, 22, 13, 56, 5, 352, DateTimeKind.Local).AddTicks(5122), null, "System", 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -368,8 +362,8 @@ namespace ProductReviewProject.Server.Migrations
                 columns: new[] { "Id", "CreatedBy", "CustomerId", "DateCreated", "DateUpdated", "Description", "ProductId", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "System", null, new DateTime(2023, 11, 30, 20, 22, 44, 312, DateTimeKind.Local).AddTicks(740), new DateTime(2023, 11, 30, 20, 22, 44, 312, DateTimeKind.Local).AddTicks(753), "Good Review", null, "System" },
-                    { 2, "System", null, new DateTime(2023, 11, 30, 20, 22, 44, 312, DateTimeKind.Local).AddTicks(760), new DateTime(2023, 11, 30, 20, 22, 44, 312, DateTimeKind.Local).AddTicks(761), "Amazing 10/10", null, "System" }
+                    { 1, "System", null, new DateTime(2024, 1, 22, 13, 56, 5, 353, DateTimeKind.Local).AddTicks(3039), new DateTime(2024, 1, 22, 13, 56, 5, 353, DateTimeKind.Local).AddTicks(3042), "Good Review", null, "System" },
+                    { 2, "System", null, new DateTime(2024, 1, 22, 13, 56, 5, 353, DateTimeKind.Local).AddTicks(3043), new DateTime(2024, 1, 22, 13, 56, 5, 353, DateTimeKind.Local).AddTicks(3044), "Amazing 10/10", null, "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -458,11 +452,6 @@ namespace ProductReviewProject.Server.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ratings_ReviewId",
-                table: "Ratings",
-                column: "ReviewId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Reviews_CustomerId",
                 table: "Reviews",
                 column: "CustomerId");
@@ -504,6 +493,9 @@ namespace ProductReviewProject.Server.Migrations
                 name: "Ratings");
 
             migrationBuilder.DropTable(
+                name: "Reviews");
+
+            migrationBuilder.DropTable(
                 name: "Staffs");
 
             migrationBuilder.DropTable(
@@ -511,9 +503,6 @@ namespace ProductReviewProject.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Reviews");
 
             migrationBuilder.DropTable(
                 name: "Customers");

@@ -1,0 +1,64 @@
+﻿@page "/ratings/create"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title"> Create New Rating</h3>
+<hr />
+<br />
+
+<EditForm Model="@rating" OnValidSubmit="CreateRating">
+	<DataAnnotationsValidator />
+	<ValidationSummary />
+
+	<div class=" form-group">
+		<label>Description: </label>
+		<div>
+			<InputText @bind-Value="@rating.Description" class="form-control" />
+			<ValidationMessage For="@(() => rating.Description)" />
+		</div>
+
+		<label>Rating: </label>
+		<div>
+			<InputNumber @bind-Value="@rating.Value" class="form-control" />
+			<ValidationMessage For="@(() => rating.Value)" />
+		</div>
+
+		<label>Customer: </label>
+		<div>
+			<InputSelect @bind-Value="rating.CustomerId" class="form-control">
+				<option value=" ">-- Select Make --</option>
+				@if (Customers != null)
+				{
+					foreach (var customer in Customers)
+					{
+						<option value="@customer.Id">@customer.Name</option>
+					}
+				}
+			</InputSelect>
+			<ValidationMessage For="@(() => rating.CustomerId)" />
+		</div>
+	</div>
+
+	<button type="submit" class="btn btn-success btn-block">
+		Create Rating
+	</button>
+</EditForm>
+
+@code
+{
+	Rating rating = new Rating();
+	private IList<Customer>? Customers;
+
+	protected async override Task OnInitializedAsync()
+	{
+		
+		Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
+	}
+
+	private async Task CreateRating()
+	{
+		await _client.PostAsJsonAsync(Endpoints.RatingsEndpoint, rating);
+		_navManager.NavigateTo("/ratings/");
+	}
+
+}

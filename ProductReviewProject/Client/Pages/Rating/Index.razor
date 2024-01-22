@@ -1,39 +1,49 @@
-﻿@page "/ratings"
+﻿@page "/ratings/"
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
 
 
-<h3 class="card-title">Rating Ratings</h3>
+<h3 class="card-title">Car Ratings</h3>
+<a href="/ratings/create" class="btn btn-secondary">
+	<span class="oi oi-plus"></span>
+	Create New Rating
+</a>
+<br />
+<br />
 
 @if (Ratings == null)
 {
-	<div class="alert alert-info">Loading Makes...</div>
+	<div class"alert alert-info">Loading Ratings...</div>
 }
-
 else
 {
 	<table class="table table-responsive">
+
 		<thead>
-
-		<th>Value</th>
-		<th>Description</th>
-		<th>Actions</th>
-
+			<tr>
+				<th>Make</th>
+				<th>Model</th>
+				<th>Year</th>
+				<th>License Plate Number</th>
+				<th>Actions</th>
+			</tr>
 		</thead>
 
 		<tbody>
+
 			@foreach (var rating in Ratings)
 			{
 				<tr>
-					<td>@rating.Value</td>
 					<td>@rating.Description</td>
-
+					<td>@rating.Value</td>
+					<td>@rating.Customer.Name</td>
+					
 					<td>
-
 						<a href="/ratings/view/@rating.Id" class="btn btn-primary">
 							<span class="oi oi-book"></span>
 						</a>
+
 
 						<a href="/ratings/edit/@rating.Id" class="btn btn-warning">
 							<span class="oi oi-pencil"></span>
@@ -41,45 +51,49 @@ else
 
 						<button class="btn btn-danger" @onclick="@(()=>Delete(rating.Id))">
 							<span class="oi oi-delete"></span>
-
 						</button>
 					</td>
-
 				</tr>
+
+
 			}
 		</tbody>
+
+
 	</table>
 
 }
+
 <br />
+
 
 @code
 {
 	private List<Rating>? Ratings;
 
-
 	protected async override Task OnInitializedAsync()
 	{
-		Ratings = await _client.GetFromJsonAsync<List<Rating>>($"{Endpoints.RatingsEndpoint}");
+		Ratings = await _client.GetFromJsonAsync<List<Rating>>("api/ratings");
 	}
-
 
 	async Task Delete(int ratingId)
 	{
 		if (Ratings != null)
 		{
+
 			var rating = Ratings.First(q => q.Id == ratingId);
 			var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete{rating.Description}?");
 
 			if (confirm)
 			{
+
 				await _client.DeleteAsync($"{Endpoints.RatingsEndpoint}/{ratingId}");
 				await OnInitializedAsync();
 			}
 		}
 	}
+
+
+
+
 }
-
-
-
-

@@ -36,7 +36,7 @@ namespace ProductReviewProject.Server.Controllers
 
 		// GET: api/Customers/5
 		[HttpGet("{id}")]
-		public async Task<ActionResult<Customer>> GetCustomer(int id)
+		public async Task<ActionResult> GetCustomer(int id)
 		{
 			var customer = await _unitOfWork.Customers.Get(q => q.Id == id);
 
