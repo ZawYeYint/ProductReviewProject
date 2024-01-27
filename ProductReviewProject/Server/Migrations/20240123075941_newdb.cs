@@ -62,7 +62,7 @@ namespace ProductReviewProject.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustomerEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -138,6 +138,7 @@ namespace ProductReviewProject.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<int>(type: "int", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -156,6 +157,7 @@ namespace ProductReviewProject.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StaffEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -281,6 +283,7 @@ namespace ProductReviewProject.Server.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Value = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: true),
+                    ProductId = table.Column<int>(type: "int", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -293,6 +296,11 @@ namespace ProductReviewProject.Server.Migrations
                         name: "FK_Ratings_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Ratings_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
                         principalColumn: "Id");
                 });
 
@@ -337,33 +345,33 @@ namespace ProductReviewProject.Server.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "a69fab01-869c-4f62-a52a-d1066bbce33a", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEPg8uXqWkK8lmWm5pjUOTXQo0pd0iyLDIX1hNdOyYHMjMMt1XxtD0obonGO/DrpVUg==", null, false, "426f2d36-fc2a-4be5-b579-bddf4c6da42f", false, "admin@localhost.com" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "aa4e25be-cb1f-40b2-beb4-745ca9ce1f0a", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEDJEIlK+jOcC9TbCHud5puAoP91oSmn8Fbuln0a5DvTCX+Iou74OdSI3cojqPmRCBw==", null, false, "373ffb01-72a0-4ebe-9f65-70b64e36daf9", false, "admin@localhost.com" });
+
+            migrationBuilder.InsertData(
+                table: "Customers",
+                columns: new[] { "Id", "Contact", "CreatedBy", "CustomerEmail", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { 1, "123456789", "System", "Product.com", new DateTime(2024, 1, 23, 15, 59, 41, 106, DateTimeKind.Local).AddTicks(3821), new DateTime(2024, 1, 23, 15, 59, 41, 106, DateTimeKind.Local).AddTicks(3829), "Customer1", "System" },
+                    { 2, "123456789", "System", "Product.com", new DateTime(2024, 1, 23, 15, 59, 41, 106, DateTimeKind.Local).AddTicks(3834), new DateTime(2024, 1, 23, 15, 59, 41, 106, DateTimeKind.Local).AddTicks(3835), "Customer2", "System" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Description", "Name", "UpdatedBy" },
+                columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Description", "Name", "Price", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "System", new DateTime(2024, 1, 22, 13, 56, 5, 351, DateTimeKind.Local).AddTicks(5970), new DateTime(2024, 1, 22, 13, 56, 5, 351, DateTimeKind.Local).AddTicks(5979), null, "Product1", "System" },
-                    { 2, "System", new DateTime(2024, 1, 22, 13, 56, 5, 351, DateTimeKind.Local).AddTicks(5981), new DateTime(2024, 1, 22, 13, 56, 5, 351, DateTimeKind.Local).AddTicks(5981), null, "Product2", "System" }
+                    { 1, "System", new DateTime(2024, 1, 23, 15, 59, 41, 103, DateTimeKind.Local).AddTicks(5488), new DateTime(2024, 1, 23, 15, 59, 41, 103, DateTimeKind.Local).AddTicks(5517), "Product1", "Product1", null, "System" },
+                    { 2, "System", new DateTime(2024, 1, 23, 15, 59, 41, 103, DateTimeKind.Local).AddTicks(5521), new DateTime(2024, 1, 23, 15, 59, 41, 103, DateTimeKind.Local).AddTicks(5522), "Product2", "Product2", null, "System" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Ratings",
-                columns: new[] { "Id", "CreatedBy", "CustomerId", "DateCreated", "DateUpdated", "Description", "UpdatedBy", "Value" },
+                table: "Staffs",
+                columns: new[] { "Id", "Contact", "CreatedBy", "DateCreated", "DateUpdated", "Name", "StaffEmail", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "System", null, new DateTime(2024, 1, 22, 13, 56, 5, 352, DateTimeKind.Local).AddTicks(5114), new DateTime(2024, 1, 22, 13, 56, 5, 352, DateTimeKind.Local).AddTicks(5120), null, "System", 3 },
-                    { 2, "System", null, new DateTime(2024, 1, 22, 13, 56, 5, 352, DateTimeKind.Local).AddTicks(5122), new DateTime(2024, 1, 22, 13, 56, 5, 352, DateTimeKind.Local).AddTicks(5122), null, "System", 4 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Reviews",
-                columns: new[] { "Id", "CreatedBy", "CustomerId", "DateCreated", "DateUpdated", "Description", "ProductId", "UpdatedBy" },
-                values: new object[,]
-                {
-                    { 1, "System", null, new DateTime(2024, 1, 22, 13, 56, 5, 353, DateTimeKind.Local).AddTicks(3039), new DateTime(2024, 1, 22, 13, 56, 5, 353, DateTimeKind.Local).AddTicks(3042), "Good Review", null, "System" },
-                    { 2, "System", null, new DateTime(2024, 1, 22, 13, 56, 5, 353, DateTimeKind.Local).AddTicks(3043), new DateTime(2024, 1, 22, 13, 56, 5, 353, DateTimeKind.Local).AddTicks(3044), "Amazing 10/10", null, "System" }
+                    { 1, "123456789", "System", new DateTime(2024, 1, 23, 15, 59, 41, 109, DateTimeKind.Local).AddTicks(1366), new DateTime(2024, 1, 23, 15, 59, 41, 109, DateTimeKind.Local).AddTicks(1371), "Staff1", null, "System" },
+                    { 2, "123456789", "System", new DateTime(2024, 1, 23, 15, 59, 41, 109, DateTimeKind.Local).AddTicks(1375), new DateTime(2024, 1, 23, 15, 59, 41, 109, DateTimeKind.Local).AddTicks(1375), "Staff2", null, "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -450,6 +458,11 @@ namespace ProductReviewProject.Server.Migrations
                 name: "IX_Ratings_CustomerId",
                 table: "Ratings",
                 column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ratings_ProductId",
+                table: "Ratings",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_CustomerId",

@@ -1,10 +1,17 @@
-﻿@page "/reviews"
+﻿@page "/reviews/"
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
 
 
-<h3 class="card-title">Review Reviews</h3>
+<h3 class="card-title">Product Reviews</h3>
+
+<a href="/reviews/create" class="btn btn-secondary">
+	<span class="oi oi-plus"></span>
+	Create New Review
+</a>
+<br />
+<br />
 
 @if (Reviews == null)
 {
@@ -28,8 +35,8 @@ else
 			{
 				<tr>
 					<td>@review.Description</td>
-					<td>@review.Product</td>
-					<td>@review.Customer</td>
+					<td>@review.Product?.Name</td>
+					<td>@review.Customer?.Name</td>
 
 
 

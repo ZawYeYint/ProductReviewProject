@@ -5,6 +5,12 @@
 
 
 <h3 class="card-title">Staff Staffs</h3>
+<a href="/staffs/create" class="btn btn-secondary">
+	<span class="oi oi-plus"></span>
+	Create New Staff
+</a>
+<br />
+<br />
 
 @if (Staffs == null)
 {
@@ -18,6 +24,7 @@ else
 
 		<th>Name</th>
 		<th>Contact</th>
+		<th>EmailAddress</th>
 		<th>Actions</th>
 
 		</thead>
@@ -28,6 +35,7 @@ else
 				<tr>
 					<td>@staff.Name</td>
 					<td>@staff.Contact</td>
+					<td>@staff.StaffEmail</td>
 
 					<td>
 

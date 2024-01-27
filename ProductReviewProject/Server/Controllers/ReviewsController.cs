@@ -15,28 +15,25 @@ namespace ProductReviewProject.Server.Controllers
 	[ApiController]
 	public class ReviewsController : ControllerBase
 	{
-		//private readonly ApplicationDbContext _context;
 		private readonly IUnitOfWork _unitOfWork;
 
 		public ReviewsController(IUnitOfWork unitOfWork)
 		{
-			//_context = context;
 			_unitOfWork = unitOfWork;
 		}
 
 		// GET: api/Reviews
 		[HttpGet]
-		public async Task<ActionResult> GetReviews()
+		//public async Task<IActionResult<IEnumerable<Review>>> GetReviews()
+		public async Task<IActionResult> GetReviews()
 		{
-			var reviews = await _unitOfWork.Reviews.GetAll();
+			var reviews = await _unitOfWork.Reviews.GetAll(includes: q => q.Include(x => x.Customer).Include(x => x.Product));
 			return Ok(reviews);
-
-
 		}
 
 		// GET: api/Reviews/5
 		[HttpGet("{id}")]
-		public async Task<ActionResult<Review>> GetReview(int id)
+		public async Task<ActionResult> GetReview(int id)
 		{
 			var review = await _unitOfWork.Reviews.Get(q => q.Id == id);
 
@@ -44,6 +41,8 @@ namespace ProductReviewProject.Server.Controllers
 			{
 				return NotFound();
 			}
+
+
 			return Ok(review);
 		}
 
@@ -57,12 +56,10 @@ namespace ProductReviewProject.Server.Controllers
 				return BadRequest();
 			}
 
-			// _context.Entry(review).State = EntityState.Modified;
 			_unitOfWork.Reviews.Update(review);
 
 			try
 			{
-				//await _context.SaveChangesAsync();
 				await _unitOfWork.Save(HttpContext);
 			}
 			catch (DbUpdateConcurrencyException)
@@ -85,9 +82,9 @@ namespace ProductReviewProject.Server.Controllers
 		[HttpPost]
 		public async Task<ActionResult<Review>> PostReview(Review review)
 		{
-
 			await _unitOfWork.Reviews.Insert(review);
 			await _unitOfWork.Save(HttpContext);
+
 
 			return CreatedAtAction("GetReview", new { id = review.Id }, review);
 		}

@@ -15,36 +15,35 @@ namespace ProductReviewProject.Server.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        //private readonly ApplicationDbContext _context;
         private readonly IUnitOfWork _unitOfWork;
 
         public ProductsController(IUnitOfWork unitOfWork)
         {
-            //_context = context;
             _unitOfWork = unitOfWork;
         }
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult>GetProducts()
-        {
+		//public async Task<IActionResult<IEnumerable<Product>>> GetProducts()
+		public async Task<IActionResult> GetProducts()
+		{
             var products = await _unitOfWork.Products.GetAll();
             return Ok(products);
-      
-
         }
 
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult> GetProduct(int id)
         {
-         var product = await _unitOfWork.Products.Get(q=>q.Id==id);
-
-            if(product == null)
+            var product= await  _unitOfWork.Products.Get(q=> q.Id == id);
+            
+            if (product == null)
             {
                 return NotFound();
             }
-            return Ok (product);
+        
+
+            return Ok(product);
         }
 
         // PUT: api/Products/5
@@ -57,12 +56,10 @@ namespace ProductReviewProject.Server.Controllers
                 return BadRequest();
             }
 
-           // _context.Entry(product).State = EntityState.Modified;
-           _unitOfWork.Products.Update(product);
+            _unitOfWork.Products.Update(product);
 
             try
             {
-                //await _context.SaveChangesAsync();
                 await _unitOfWork.Save(HttpContext);
             }
             catch (DbUpdateConcurrencyException)
@@ -85,19 +82,19 @@ namespace ProductReviewProject.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
-
             await _unitOfWork.Products.Insert(product);
-            await _unitOfWork.Save(HttpContext);
+			await _unitOfWork.Save(HttpContext);
 
-            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
+
+			return CreatedAtAction("GetProduct", new { id = product.Id }, product);
         }
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
-
-            var product = await _unitOfWork.Products.Get(q => q.Id == id);
+            
+            var product = await _unitOfWork.Products.Get(q=>q.Id == id);
             if (product == null)
             {
                 return NotFound();
@@ -111,7 +108,7 @@ namespace ProductReviewProject.Server.Controllers
 
         private async Task<bool> ProductExists(int id)
         {
-            var product = await    _unitOfWork.Products.Get (q => q.Id == id);
+            var product = await _unitOfWork.Products.Get(q=>q.Id == id);
             return product != null;
         }
     }

@@ -1,4 +1,5 @@
-﻿using ProductReviewProject.Server.Data;
+﻿
+using ProductReviewProject.Server.Data;
 using ProductReviewProject.Server.IRepository;
 using ProductReviewProject.Server.Models;
 using ProductReviewProject.Shared.Domain;
@@ -7,7 +8,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -18,10 +18,12 @@ namespace ProductReviewProject.Server.Repository
 	{
 		private readonly ApplicationDbContext _context;
 		private IGenericRepository<Product> _products;
-		private IGenericRepository<Review> _reviews;
 		private IGenericRepository<Customer> _customers;
-		private IGenericRepository<Rating> _ratings;
 		private IGenericRepository<Staff> _staffs;
+		private IGenericRepository<Rating> _ratings;
+		private IGenericRepository<Review> _reviews;
+		
+		
 
 		private UserManager<ApplicationUser> _userManager;
 
@@ -32,15 +34,15 @@ namespace ProductReviewProject.Server.Repository
 		}
 		public IGenericRepository<Product> Products
 			=> _products ??= new GenericRepository<Product>(_context);
-		public IGenericRepository<Review> Reviews
-			=> _reviews ??= new GenericRepository<Review>(_context);
 		public IGenericRepository<Customer> Customers
 			=> _customers ??= new GenericRepository<Customer>(_context);
 		public IGenericRepository<Staff> Staffs
 			=> _staffs ??= new GenericRepository<Staff>(_context);
 		public IGenericRepository<Rating> Ratings
 			=> _ratings ??= new GenericRepository<Rating>(_context);
-		
+		public IGenericRepository<Review> Reviews
+			=> _reviews ??= new GenericRepository<Review>(_context);
+	
 
 		public void Dispose()
 		{

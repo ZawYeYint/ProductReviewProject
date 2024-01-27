@@ -15,28 +15,25 @@ namespace ProductReviewProject.Server.Controllers
 	[ApiController]
 	public class StaffsController : ControllerBase
 	{
-		//private readonly ApplicationDbContext _context;
 		private readonly IUnitOfWork _unitOfWork;
 
 		public StaffsController(IUnitOfWork unitOfWork)
 		{
-			//_context = context;
 			_unitOfWork = unitOfWork;
 		}
 
 		// GET: api/Staffs
 		[HttpGet]
-		public async Task<ActionResult> GetStaffs()
+		//public async Task<IActionResult<IEnumerable<Staff>>> GetStaffs()
+		public async Task<IActionResult> GetStaffs()
 		{
 			var staffs = await _unitOfWork.Staffs.GetAll();
 			return Ok(staffs);
-
-
 		}
 
 		// GET: api/Staffs/5
 		[HttpGet("{id}")]
-		public async Task<ActionResult<Staff>> GetStaff(int id)
+		public async Task<ActionResult> GetStaff(int id)
 		{
 			var staff = await _unitOfWork.Staffs.Get(q => q.Id == id);
 
@@ -44,6 +41,8 @@ namespace ProductReviewProject.Server.Controllers
 			{
 				return NotFound();
 			}
+
+
 			return Ok(staff);
 		}
 
@@ -57,12 +56,10 @@ namespace ProductReviewProject.Server.Controllers
 				return BadRequest();
 			}
 
-			// _context.Entry(staff).State = EntityState.Modified;
 			_unitOfWork.Staffs.Update(staff);
 
 			try
 			{
-				//await _context.SaveChangesAsync();
 				await _unitOfWork.Save(HttpContext);
 			}
 			catch (DbUpdateConcurrencyException)
@@ -85,9 +82,9 @@ namespace ProductReviewProject.Server.Controllers
 		[HttpPost]
 		public async Task<ActionResult<Staff>> PostStaff(Staff staff)
 		{
-
 			await _unitOfWork.Staffs.Insert(staff);
 			await _unitOfWork.Save(HttpContext);
+
 
 			return CreatedAtAction("GetStaff", new { id = staff.Id }, staff);
 		}

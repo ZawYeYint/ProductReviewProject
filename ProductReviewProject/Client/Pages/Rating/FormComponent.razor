@@ -1,14 +1,10 @@
-﻿@page "/ratings/create/"
-@inject HttpClient _client
-@inject NavigationManager _navManager
+﻿@inject HttpClient _client
 
-<h3 class="card-title"> Create New Rating</h3>
-<hr />
-<br />
-
-<EditForm Model="@rating" OnValidSubmit="CreateRating">
+<EditForm Model="@rating" OnValidSubmit="OnValidSubmit">
 	<DataAnnotationsValidator />
 	<ValidationSummary />
+
+	<fieldset disabled="@Disabled">
 
 	<div class=" form-group">
 		<label>Description: </label>
@@ -16,12 +12,18 @@
 			<InputText @bind-Value="@rating.Description" class="form-control" />
 			<ValidationMessage For="@(() => rating.Description)" />
 		</div>
+	</div>
+
+	<div class=" form-group">
 
 		<label>Rating: </label>
 		<div>
 			<InputNumber @bind-Value="@rating.Value" class="form-control" />
 			<ValidationMessage For="@(() => rating.Value)" />
 		</div>
+	</div>
+
+	<div class=" form-group">
 
 		<label>Customer: </label>
 		<div>
@@ -37,7 +39,8 @@
 			</InputSelect>
 			<ValidationMessage For="@(() => rating.CustomerId)" />
 		</div>
-
+	</div>
+		<div class=" form-group">
 		<label>Product: </label>
 		<div>
 			<InputSelect @bind-Value="rating.ProductId" class="form-control">
@@ -54,28 +57,29 @@
 		</div>
 	</div>
 
-	<button type="submit" class="btn btn-success btn-block">
-		Create Rating
-	</button>
-</EditForm>
+	</fieldset>
 
-@code
+	@if (!Disabled)
+	{
+		<button type="submit" class="btn btn-success btn-block">
+			@ButtonText
+	</button>
+	}
+	<BackToList Target="ratings"/>
+</EditForm>
+@code 
 {
-	Rating rating = new Rating();
+	[Parameter] public bool Disabled { get; set; } = false;
+	[Parameter] public Rating? rating { get; set; }
+	[Parameter] public string ButtonText { get; set; } = "Save";
+	[Parameter] public EventCallback OnValidSubmit { get; set; }
+
 	private IList<Customer>? Customers;
 	private IList<Product>? Products;
-
 	protected async override Task OnInitializedAsync()
 	{
-		
+
 		Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
 		Products = await _client.GetFromJsonAsync<List<Product>>($"{Endpoints.ProductsEndpoint}");
 	}
-
-	private async Task CreateRating()
-	{
-		await _client.PostAsJsonAsync(Endpoints.RatingsEndpoint, rating);
-		_navManager.NavigateTo("/ratings/");
-	}
-
 }

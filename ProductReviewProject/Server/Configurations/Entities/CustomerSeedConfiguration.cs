@@ -6,28 +6,31 @@ using Microsoft.EntityFrameworkCore;
 using System.Drawing;
 using ProductReviewProject.Shared.Domain;
 
-
 namespace ProductReviewProject.Server.Configurations.Entities
 {
-	public class RatingSeedConfiguration : IEntityTypeConfiguration<Rating>
+	public class CustomerSeedConfiguration : IEntityTypeConfiguration<Customer>
 	{
-		public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Rating> builder)
+		public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Customer> builder)
 		{
 			builder.HasData
 			(
-			new Rating
+			new Customer
 			{
 				Id = 1,
-				Value = 3,
+				Name = "Customer1",
+				Contact="123456789",
+				CustomerEmail = "Product.com",
 				DateCreated = DateTime.Now,
 				DateUpdated = DateTime.Now,
 				CreatedBy = "System",
 				UpdatedBy = "System"
 			},
-			new Rating
+			new Customer
 			{
 				Id = 2,
-				Value = 4,
+				Name = "Customer2",
+				Contact = "123456789",
+				CustomerEmail = "Product.com",
 				DateCreated = DateTime.Now,
 				DateUpdated = DateTime.Now,
 				CreatedBy = "System",

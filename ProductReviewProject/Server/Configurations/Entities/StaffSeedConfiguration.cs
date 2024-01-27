@@ -6,28 +6,31 @@ using Microsoft.EntityFrameworkCore;
 using System.Drawing;
 using ProductReviewProject.Shared.Domain;
 
-
 namespace ProductReviewProject.Server.Configurations.Entities
 {
-	public class ReviewSeedConfiguration : IEntityTypeConfiguration<Review>
+	public class StaffSeedConfiguration : IEntityTypeConfiguration<Staff>
 	{
-		public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Review> builder)
+		public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Staff> builder)
 		{
 			builder.HasData
 			(
-			new Review
+			new Staff
 			{
 				Id = 1,
-				Description = "Good Review",
+				Name = "Staff1",
+				Contact = "123456789",
+				StaffEmail="Staff1.com",
 				DateCreated = DateTime.Now,
 				DateUpdated = DateTime.Now,
 				CreatedBy = "System",
 				UpdatedBy = "System"
 			},
-			new Review
+			new Staff
 			{
 				Id = 2,
-				Description = "Amazing 10/10",
+				Name = "Staff2",
+				Contact = "123456789",
+				StaffEmail = "Staff1.com",
 				DateCreated = DateTime.Now,
 				DateUpdated = DateTime.Now,
 				CreatedBy = "System",

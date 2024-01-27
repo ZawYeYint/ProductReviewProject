@@ -15,23 +15,20 @@ namespace ProductReviewProject.Server.Controllers
 	[ApiController]
 	public class RatingsController : ControllerBase
 	{
-		//private readonly ApplicationDbContext _context;
 		private readonly IUnitOfWork _unitOfWork;
 
 		public RatingsController(IUnitOfWork unitOfWork)
 		{
-			//_context = context;
 			_unitOfWork = unitOfWork;
 		}
 
 		// GET: api/Ratings
 		[HttpGet]
-		public async Task<ActionResult> GetRatings()
+		//public async Task<IActionResult<IEnumerable<Rating>>> GetRatings()
+		public async Task<IActionResult> GetRatings()
 		{
-			var ratings = await _unitOfWork.Ratings.GetAll();
+			var ratings = await _unitOfWork.Ratings.GetAll(includes: q => q.Include(x => x.Customer).Include(x => x.Product));
 			return Ok(ratings);
-
-
 		}
 
 		// GET: api/Ratings/5
@@ -44,6 +41,8 @@ namespace ProductReviewProject.Server.Controllers
 			{
 				return NotFound();
 			}
+
+
 			return Ok(rating);
 		}
 
@@ -57,12 +56,10 @@ namespace ProductReviewProject.Server.Controllers
 				return BadRequest();
 			}
 
-			// _context.Entry(rating).State = EntityState.Modified;
 			_unitOfWork.Ratings.Update(rating);
 
 			try
 			{
-				//await _context.SaveChangesAsync();
 				await _unitOfWork.Save(HttpContext);
 			}
 			catch (DbUpdateConcurrencyException)
@@ -85,9 +82,9 @@ namespace ProductReviewProject.Server.Controllers
 		[HttpPost]
 		public async Task<ActionResult<Rating>> PostRating(Rating rating)
 		{
-
 			await _unitOfWork.Ratings.Insert(rating);
 			await _unitOfWork.Save(HttpContext);
+
 
 			return CreatedAtAction("GetRating", new { id = rating.Id }, rating);
 		}

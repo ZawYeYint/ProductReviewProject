@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProductReviewProject.Server.Data;
 
@@ -11,9 +12,11 @@ using ProductReviewProject.Server.Data;
 namespace ProductReviewProject.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240123075941_newdb")]
+    partial class newdb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -396,7 +399,7 @@ namespace ProductReviewProject.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "169877ff-8250-4508-a9ca-f1c5e54735ba",
+                            ConcurrencyStamp = "aa4e25be-cb1f-40b2-beb4-745ca9ce1f0a",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -404,9 +407,9 @@ namespace ProductReviewProject.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECDRkKDbMvrsyuafYHdBNjH6lMqGqljkYsgBTGbBN9gUod8kBpJAz+rTMb/lzMgp0Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDJEIlK+jOcC9TbCHud5puAoP91oSmn8Fbuln0a5DvTCX+Iou74OdSI3cojqPmRCBw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "92394db2-e135-472c-9aab-ce7a955c648e",
+                            SecurityStamp = "373ffb01-72a0-4ebe-9f65-70b64e36daf9",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -421,14 +424,12 @@ namespace ProductReviewProject.Server.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Contact")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CustomerEmail")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateCreated")
@@ -438,9 +439,7 @@ namespace ProductReviewProject.Server.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -456,8 +455,8 @@ namespace ProductReviewProject.Server.Migrations
                             Contact = "123456789",
                             CreatedBy = "System",
                             CustomerEmail = "Product.com",
-                            DateCreated = new DateTime(2024, 1, 23, 20, 1, 29, 126, DateTimeKind.Local).AddTicks(7921),
-                            DateUpdated = new DateTime(2024, 1, 23, 20, 1, 29, 126, DateTimeKind.Local).AddTicks(7949),
+                            DateCreated = new DateTime(2024, 1, 23, 15, 59, 41, 106, DateTimeKind.Local).AddTicks(3821),
+                            DateUpdated = new DateTime(2024, 1, 23, 15, 59, 41, 106, DateTimeKind.Local).AddTicks(3829),
                             Name = "Customer1",
                             UpdatedBy = "System"
                         },
@@ -467,8 +466,8 @@ namespace ProductReviewProject.Server.Migrations
                             Contact = "123456789",
                             CreatedBy = "System",
                             CustomerEmail = "Product.com",
-                            DateCreated = new DateTime(2024, 1, 23, 20, 1, 29, 126, DateTimeKind.Local).AddTicks(7956),
-                            DateUpdated = new DateTime(2024, 1, 23, 20, 1, 29, 126, DateTimeKind.Local).AddTicks(7956),
+                            DateCreated = new DateTime(2024, 1, 23, 15, 59, 41, 106, DateTimeKind.Local).AddTicks(3834),
+                            DateUpdated = new DateTime(2024, 1, 23, 15, 59, 41, 106, DateTimeKind.Local).AddTicks(3835),
                             Name = "Customer2",
                             UpdatedBy = "System"
                         });
@@ -492,17 +491,12 @@ namespace ProductReviewProject.Server.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Price")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
@@ -517,22 +511,20 @@ namespace ProductReviewProject.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 23, 20, 1, 29, 125, DateTimeKind.Local).AddTicks(6427),
-                            DateUpdated = new DateTime(2024, 1, 23, 20, 1, 29, 125, DateTimeKind.Local).AddTicks(6447),
+                            DateCreated = new DateTime(2024, 1, 23, 15, 59, 41, 103, DateTimeKind.Local).AddTicks(5488),
+                            DateUpdated = new DateTime(2024, 1, 23, 15, 59, 41, 103, DateTimeKind.Local).AddTicks(5517),
                             Description = "Product1",
                             Name = "Product1",
-                            Price = 1,
                             UpdatedBy = "System"
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 23, 20, 1, 29, 125, DateTimeKind.Local).AddTicks(6450),
-                            DateUpdated = new DateTime(2024, 1, 23, 20, 1, 29, 125, DateTimeKind.Local).AddTicks(6450),
+                            DateCreated = new DateTime(2024, 1, 23, 15, 59, 41, 103, DateTimeKind.Local).AddTicks(5521),
+                            DateUpdated = new DateTime(2024, 1, 23, 15, 59, 41, 103, DateTimeKind.Local).AddTicks(5522),
                             Description = "Product2",
                             Name = "Product2",
-                            Price = 2,
                             UpdatedBy = "System"
                         });
                 });
@@ -549,7 +541,6 @@ namespace ProductReviewProject.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("CustomerId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreated")
@@ -559,12 +550,9 @@ namespace ProductReviewProject.Server.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ProductId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
@@ -594,7 +582,6 @@ namespace ProductReviewProject.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("CustomerId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreated")
@@ -604,12 +591,9 @@ namespace ProductReviewProject.Server.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ProductId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
@@ -633,7 +617,6 @@ namespace ProductReviewProject.Server.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Contact")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
@@ -646,12 +629,9 @@ namespace ProductReviewProject.Server.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StaffEmail")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
@@ -667,10 +647,9 @@ namespace ProductReviewProject.Server.Migrations
                             Id = 1,
                             Contact = "123456789",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 23, 20, 1, 29, 127, DateTimeKind.Local).AddTicks(7957),
-                            DateUpdated = new DateTime(2024, 1, 23, 20, 1, 29, 127, DateTimeKind.Local).AddTicks(7976),
+                            DateCreated = new DateTime(2024, 1, 23, 15, 59, 41, 109, DateTimeKind.Local).AddTicks(1366),
+                            DateUpdated = new DateTime(2024, 1, 23, 15, 59, 41, 109, DateTimeKind.Local).AddTicks(1371),
                             Name = "Staff1",
-                            StaffEmail = "Staff1.com",
                             UpdatedBy = "System"
                         },
                         new
@@ -678,10 +657,9 @@ namespace ProductReviewProject.Server.Migrations
                             Id = 2,
                             Contact = "123456789",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 23, 20, 1, 29, 127, DateTimeKind.Local).AddTicks(7980),
-                            DateUpdated = new DateTime(2024, 1, 23, 20, 1, 29, 127, DateTimeKind.Local).AddTicks(7981),
+                            DateCreated = new DateTime(2024, 1, 23, 15, 59, 41, 109, DateTimeKind.Local).AddTicks(1375),
+                            DateUpdated = new DateTime(2024, 1, 23, 15, 59, 41, 109, DateTimeKind.Local).AddTicks(1375),
                             Name = "Staff2",
-                            StaffEmail = "Staff1.com",
                             UpdatedBy = "System"
                         });
                 });
@@ -741,15 +719,11 @@ namespace ProductReviewProject.Server.Migrations
                 {
                     b.HasOne("ProductReviewProject.Shared.Domain.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("ProductReviewProject.Shared.Domain.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductId");
 
                     b.Navigation("Customer");
 
@@ -760,15 +734,11 @@ namespace ProductReviewProject.Server.Migrations
                 {
                     b.HasOne("ProductReviewProject.Shared.Domain.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("ProductReviewProject.Shared.Domain.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductId");
 
                     b.Navigation("Customer");
 

@@ -18,6 +18,8 @@ namespace ProductReviewProject.Server.Configurations.Entities
 			{
 				Id = 1,
 				Name = "Product1",
+				Description="Product1",
+				Price=1,
 				DateCreated = DateTime.Now,
 				DateUpdated = DateTime.Now,
 				CreatedBy = "System",
@@ -27,6 +29,8 @@ namespace ProductReviewProject.Server.Configurations.Entities
 			{
 				Id = 2,
 				Name = "Product2",
+				Description = "Product2",
+				Price = 2,
 				DateCreated = DateTime.Now,
 				DateUpdated = DateTime.Now,
 				CreatedBy = "System",

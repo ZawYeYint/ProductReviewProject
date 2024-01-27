@@ -15,23 +15,20 @@ namespace ProductReviewProject.Server.Controllers
 	[ApiController]
 	public class CustomersController : ControllerBase
 	{
-		//private readonly ApplicationDbContext _context;
 		private readonly IUnitOfWork _unitOfWork;
 
 		public CustomersController(IUnitOfWork unitOfWork)
 		{
-			//_context = context;
 			_unitOfWork = unitOfWork;
 		}
 
 		// GET: api/Customers
 		[HttpGet]
-		public async Task<ActionResult> GetCustomers()
+		//public async Task<IActionResult<IEnumerable<Customer>>> GetCustomers()
+		public async Task<IActionResult> GetCustomers()
 		{
 			var customers = await _unitOfWork.Customers.GetAll();
 			return Ok(customers);
-
-
 		}
 
 		// GET: api/Customers/5
@@ -44,6 +41,8 @@ namespace ProductReviewProject.Server.Controllers
 			{
 				return NotFound();
 			}
+
+
 			return Ok(customer);
 		}
 
@@ -57,12 +56,10 @@ namespace ProductReviewProject.Server.Controllers
 				return BadRequest();
 			}
 
-			// _context.Entry(customer).State = EntityState.Modified;
 			_unitOfWork.Customers.Update(customer);
 
 			try
 			{
-				//await _context.SaveChangesAsync();
 				await _unitOfWork.Save(HttpContext);
 			}
 			catch (DbUpdateConcurrencyException)
@@ -85,9 +82,9 @@ namespace ProductReviewProject.Server.Controllers
 		[HttpPost]
 		public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
 		{
-
 			await _unitOfWork.Customers.Insert(customer);
 			await _unitOfWork.Save(HttpContext);
+
 
 			return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
 		}
@@ -97,7 +94,7 @@ namespace ProductReviewProject.Server.Controllers
 		public async Task<IActionResult> DeleteCustomer(int id)
 		{
 
-			var customer = await _unitOfWork.Customers.Get(q => q.Id == id);
+			var customer = await _unitOfWork.Customers.Get(q=>q.Id == id);
 			if (customer == null)
 			{
 				return NotFound();

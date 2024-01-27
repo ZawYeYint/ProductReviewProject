@@ -4,7 +4,7 @@
 @attribute [Authorize]
 
 
-<h3 class="card-title">Car Ratings</h3>
+<h3 class="card-title">Product Ratings</h3>
 <a href="/ratings/create" class="btn btn-secondary">
 	<span class="oi oi-plus"></span>
 	Create New Rating
@@ -22,10 +22,10 @@ else
 
 		<thead>
 			<tr>
-				<th>Make</th>
-				<th>Model</th>
-				<th>Year</th>
-				<th>License Plate Number</th>
+				<th>Customer</th>
+				<th>Product</th>
+				<th>Description</th>
+				<th>Value</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -35,9 +35,11 @@ else
 			@foreach (var rating in Ratings)
 			{
 				<tr>
+					<td>@rating.Customer.Name</td>
+					<td>@rating.Product.Name</td>
 					<td>@rating.Description</td>
 					<td>@rating.Value</td>
-					<td>@rating.Customer.Name</td>
+					
 					
 					<td>
 						<a href="/ratings/view/@rating.Id" class="btn btn-primary">

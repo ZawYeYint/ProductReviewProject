@@ -1,0 +1,75 @@
+﻿@page "/reviews/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title"> Create New Review</h3>
+<hr />
+<br />
+
+<EditForm Model="@review" OnValidSubmit="CreateReview">
+	<DataAnnotationsValidator />
+	<ValidationSummary />
+
+	<div class=" form-group">
+		<label>Description: </label>
+		<div>
+			<InputText @bind-Value="@review.Description" class="form-control" />
+			<ValidationMessage For="@(() => review.Description)" />
+		</div>
+
+		<label>Products: </label>
+		<div>
+			<InputSelect @bind-Value="review.ProductId" class="form-control">
+				<option value=" ">-- Select Product--</option>
+				@if (Products != null)
+				{
+					foreach (var product in Products)
+					{
+						<option value="@product.Id">@product.Name</option>
+					}
+				}
+			</InputSelect>
+			<ValidationMessage For="@(() => review.ProductId)" />
+		</div>
+
+		<label>Customer: </label>
+		<div>
+			<InputSelect @bind-Value="review.CustomerId" class="form-control">
+				<option value=" ">-- Select Customer--</option>
+				@if (Customers != null)
+				{
+					foreach (var customer in Customers)
+					{
+						<option value="@customer.Id">@customer.Name</option>
+					}
+				}
+			</InputSelect>
+			<ValidationMessage For="@(() => review.CustomerId)" />
+		</div>
+	</div>
+
+	<button type="submit" class="btn btn-success btn-block">
+		Create Review
+	</button>
+</EditForm>
+
+@code
+{
+	Review review = new Review();
+	private IList<Customer>? Customers;
+	private IList<Product>? Products;
+
+	protected async override Task OnInitializedAsync()
+	{
+
+		Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
+		Products = await _client.GetFromJsonAsync<List<Product>>($"{Endpoints.ProductsEndpoint}");
+	}
+
+	private async Task CreateReview()
+	{
+		await _client.PostAsJsonAsync(Endpoints.ReviewsEndpoint, review);
+		_navManager.NavigateTo("/reviews/");
+	}
+
+}

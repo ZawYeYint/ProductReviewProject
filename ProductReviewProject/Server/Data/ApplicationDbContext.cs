@@ -28,10 +28,10 @@ namespace ProductReviewProject.Server.Data
 			builder.ApplyConfiguration(new ProductSeedConfiguration());
 
 			base.OnModelCreating(builder);
-			builder.ApplyConfiguration(new RatingSeedConfiguration());
+			builder.ApplyConfiguration(new CustomerSeedConfiguration());
 
 			base.OnModelCreating(builder);
-			builder.ApplyConfiguration(new ReviewSeedConfiguration());
+			builder.ApplyConfiguration(new StaffSeedConfiguration());
 
 			base.OnModelCreating(builder);
 			builder.ApplyConfiguration(new RoleSeedConfiguration());
