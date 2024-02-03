@@ -1,8 +1,8 @@
 ﻿@page "/customers"
 @inject HttpClient _client
 @inject IJSRuntime js
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @attribute [Authorize]
-
 
 <h3 class="card-title">Customer Customers</h3>
 
@@ -62,13 +62,27 @@ else
 }
 <br />
 
+
 @code
 {
 	private List<Customer>? Customers;
 
 
+	
+
+	
+
+
 	protected async override Task OnInitializedAsync()
 	{
+		var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+		var user = authState.User;
+
+		foreach (var claim in user.Claims)
+		{
+			Console.WriteLine($"Claim Type: {claim.Type}, Claim Value: {claim.Value}");
+		}
+
 		Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
 	}
 

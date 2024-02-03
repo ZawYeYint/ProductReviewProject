@@ -1,7 +1,13 @@
 ﻿@page "/products"
 @inject HttpClient _client
 @inject IJSRuntime js
-@attribute [Authorize]
+@inject NavigationManager navManager
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
+
+@attribute [Authorize(Roles ="Administrator")]
+
+
 
 
 <h3 class="card-title">Product Products</h3>
@@ -33,29 +39,32 @@ else
 		<tbody>
 			@foreach (var product in Products)
 			{
-			<tr>
-				<td>@product.Name</td>
-				<td>@product.Price</td>
-				<td>@product.DateCreated</td>
 
-				<td>
+				
+					<tr>
+						<td>@product.Name</td>
+						<td>@product.Price</td>
+						<td>@product.DateCreated</td>
 
-					<a href="/products/view/@product.Id" class="btn btn-primary">
-						<span class="oi oi-book"></span>
-					</a>
+						<td>
 
-					<a href="/products/edit/@product.Id" class="btn btn-warning">
-						<span class="oi oi-pencil"></span>
-					</a>
+							<a href="/products/view/@product.Id" class="btn btn-primary">
+								<span class="oi oi-book"></span>
+							</a>
 
-					<button class= "btn btn-danger" @onclick= "@(()=>Delete(product.Id))">
-						<span class="oi oi-delete"></span>
+							<a href="/products/edit/@product.Id" class="btn btn-warning">
+								<span class="oi oi-pencil"></span>
+							</a>
 
-						</button>
-				</td>
+							<button class= "btn btn-danger" @onclick= "@(()=>Delete(product.Id))">
+								<span class="oi oi-delete"></span>
 
-			</tr>
-		}
+							</button>
+						</td>
+
+					</tr>
+				
+			}
 		</tbody>
 	</table>
 
@@ -64,11 +73,18 @@ else
 
 @code
 {
+
 	private List<Product>? Products;
+
+	// private List<AppUser> AppUsers;
+	// private IEnumerable<Claim> _claims = Enumerable.Empty<Claim>();
+	// private string _currentUserId;
+	// private string _currentUserName;
 
 
 	protected async override Task OnInitializedAsync()
 	{
+		_interceptor.MonitorEvent();
 		Products = await _client.GetFromJsonAsync<List<Product>>($"{Endpoints.ProductsEndpoint}");
 	}
 
@@ -86,6 +102,11 @@ else
 				await OnInitializedAsync();
 			}
 		}
+	}
+
+	public void Dispose()
+	{
+		_interceptor.DisposeEvent();
 	}
 }
 

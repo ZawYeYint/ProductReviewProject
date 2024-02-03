@@ -15,7 +15,7 @@ namespace ProductReviewProject.Shared.Domain
 		public string? Name { get; set; }
 		
 		[Required]
-		[DataType(DataType.PhoneNumber,ErrorMessage ="Invalid Contact Number")]
+		[RegularExpression(@"^\d{8}$", ErrorMessage = "Invalid contact number.")]
 		public string? Contact {  get; set; }
 
 		[Required]

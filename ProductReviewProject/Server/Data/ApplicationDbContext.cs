@@ -1,5 +1,6 @@
 ﻿using Duende.IdentityServer.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using ProductReviewProject.Server.Configurations.Entities;
@@ -21,6 +22,7 @@ namespace ProductReviewProject.Server.Data
 		public DbSet<Rating> Ratings { get; set; }
 		public DbSet<Customer> Customers { get; set; }
 		public DbSet<Staff> Staffs { get; set; }
+		public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
@@ -41,6 +43,9 @@ namespace ProductReviewProject.Server.Data
 
 			base.OnModelCreating(builder);
 			builder.ApplyConfiguration(new UserSeedConfiguration());
+
+			base.OnModelCreating(builder);
+
 		}
 	}
 }

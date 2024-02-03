@@ -12,8 +12,8 @@ using ProductReviewProject.Server.Data;
 namespace ProductReviewProject.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240123115325_RequirementFields")]
-    partial class RequirementFields
+    [Migration("20240203115324_roleAuthencationTest")]
+    partial class roleAuthencationTest
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -300,6 +300,11 @@ namespace ProductReviewProject.Server.Migrations
                         {
                             UserId = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             RoleId = "ad2bcf0c-20db-474f-8407-5a6b159518ba"
+                        },
+                        new
+                        {
+                            UserId = "2",
+                            RoleId = "bd2bcf0c-20db-474f-8407-5a6b159518bb"
                         });
                 });
 
@@ -399,7 +404,7 @@ namespace ProductReviewProject.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f20b9147-7457-4fa4-9ba6-335e7ffd8dbe",
+                            ConcurrencyStamp = "0c79369a-0740-41ac-96c9-6890c72e6078",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -407,11 +412,29 @@ namespace ProductReviewProject.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHVrwvZ1jt1zeYXcZ5ddh4ELgk/2iCc1KuONU8ozANejD9+/7WncOSOu7Ynaf+pqRg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECEzfimZi+NddCkGNQBT45Q7Ot3ye5rFcaYneqqI71LuHB8/aK/gkbrtBdIY5pEnpg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7bbcf64e-aac8-4694-97de-688007368e86",
+                            SecurityStamp = "dcd529a2-b014-4084-9bfc-6524854b6ddf",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ed68093e-d00a-4bff-b072-1c4a5b90cf4b",
+                            Email = "user@localhost.com",
+                            EmailConfirmed = false,
+                            FirstName = "User",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "User@LOCALHOST.COM",
+                            NormalizedUserName = "User@LOCALHOST.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJ3CyfTRFJmeNuCO+2c0+PSG/qGYuihaFh1SXncmyK5PSwQzDP0hSlRGxARjcr0bXQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "39ba706b-1c8d-4457-93fb-d53c9ce336dd",
+                            TwoFactorEnabled = false,
+                            UserName = "User@localhost.com"
                         });
                 });
 
@@ -459,8 +482,8 @@ namespace ProductReviewProject.Server.Migrations
                             Contact = "123456789",
                             CreatedBy = "System",
                             CustomerEmail = "Product.com",
-                            DateCreated = new DateTime(2024, 1, 23, 19, 53, 24, 969, DateTimeKind.Local).AddTicks(1140),
-                            DateUpdated = new DateTime(2024, 1, 23, 19, 53, 24, 969, DateTimeKind.Local).AddTicks(1144),
+                            DateCreated = new DateTime(2024, 2, 3, 19, 53, 24, 33, DateTimeKind.Local).AddTicks(8137),
+                            DateUpdated = new DateTime(2024, 2, 3, 19, 53, 24, 33, DateTimeKind.Local).AddTicks(8146),
                             Name = "Customer1",
                             UpdatedBy = "System"
                         },
@@ -470,8 +493,8 @@ namespace ProductReviewProject.Server.Migrations
                             Contact = "123456789",
                             CreatedBy = "System",
                             CustomerEmail = "Product.com",
-                            DateCreated = new DateTime(2024, 1, 23, 19, 53, 24, 969, DateTimeKind.Local).AddTicks(1147),
-                            DateUpdated = new DateTime(2024, 1, 23, 19, 53, 24, 969, DateTimeKind.Local).AddTicks(1147),
+                            DateCreated = new DateTime(2024, 2, 3, 19, 53, 24, 33, DateTimeKind.Local).AddTicks(8149),
+                            DateUpdated = new DateTime(2024, 2, 3, 19, 53, 24, 33, DateTimeKind.Local).AddTicks(8149),
                             Name = "Customer2",
                             UpdatedBy = "System"
                         });
@@ -496,11 +519,13 @@ namespace ProductReviewProject.Server.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int?>("Price")
                         .IsRequired()
@@ -518,8 +543,8 @@ namespace ProductReviewProject.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 23, 19, 53, 24, 968, DateTimeKind.Local).AddTicks(978),
-                            DateUpdated = new DateTime(2024, 1, 23, 19, 53, 24, 968, DateTimeKind.Local).AddTicks(988),
+                            DateCreated = new DateTime(2024, 2, 3, 19, 53, 24, 32, DateTimeKind.Local).AddTicks(6093),
+                            DateUpdated = new DateTime(2024, 2, 3, 19, 53, 24, 32, DateTimeKind.Local).AddTicks(6106),
                             Description = "Product1",
                             Name = "Product1",
                             Price = 1,
@@ -529,8 +554,8 @@ namespace ProductReviewProject.Server.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 23, 19, 53, 24, 968, DateTimeKind.Local).AddTicks(991),
-                            DateUpdated = new DateTime(2024, 1, 23, 19, 53, 24, 968, DateTimeKind.Local).AddTicks(992),
+                            DateCreated = new DateTime(2024, 2, 3, 19, 53, 24, 32, DateTimeKind.Local).AddTicks(6109),
+                            DateUpdated = new DateTime(2024, 2, 3, 19, 53, 24, 32, DateTimeKind.Local).AddTicks(6109),
                             Description = "Product2",
                             Name = "Product2",
                             Price = 2,
@@ -561,7 +586,8 @@ namespace ProductReviewProject.Server.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int?>("ProductId")
                         .IsRequired()
@@ -605,7 +631,8 @@ namespace ProductReviewProject.Server.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int?>("ProductId")
                         .IsRequired()
@@ -646,7 +673,8 @@ namespace ProductReviewProject.Server.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("StaffEmail")
                         .IsRequired()
@@ -665,8 +693,8 @@ namespace ProductReviewProject.Server.Migrations
                             Id = 1,
                             Contact = "123456789",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 23, 19, 53, 24, 969, DateTimeKind.Local).AddTicks(9261),
-                            DateUpdated = new DateTime(2024, 1, 23, 19, 53, 24, 969, DateTimeKind.Local).AddTicks(9264),
+                            DateCreated = new DateTime(2024, 2, 3, 19, 53, 24, 34, DateTimeKind.Local).AddTicks(7474),
+                            DateUpdated = new DateTime(2024, 2, 3, 19, 53, 24, 34, DateTimeKind.Local).AddTicks(7480),
                             Name = "Staff1",
                             StaffEmail = "Staff1.com",
                             UpdatedBy = "System"
@@ -676,8 +704,8 @@ namespace ProductReviewProject.Server.Migrations
                             Id = 2,
                             Contact = "123456789",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 23, 19, 53, 24, 969, DateTimeKind.Local).AddTicks(9266),
-                            DateUpdated = new DateTime(2024, 1, 23, 19, 53, 24, 969, DateTimeKind.Local).AddTicks(9267),
+                            DateCreated = new DateTime(2024, 2, 3, 19, 53, 24, 34, DateTimeKind.Local).AddTicks(7482),
+                            DateUpdated = new DateTime(2024, 2, 3, 19, 53, 24, 34, DateTimeKind.Local).AddTicks(7483),
                             Name = "Staff2",
                             StaffEmail = "Staff1.com",
                             UpdatedBy = "System"

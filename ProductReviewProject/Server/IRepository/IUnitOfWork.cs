@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ProductReviewProject.Server.Models;
 
 namespace ProductReviewProject.Server.IRepository
 {
@@ -15,6 +16,8 @@ namespace ProductReviewProject.Server.IRepository
 		IGenericRepository<Staff> Staffs { get; }
 		IGenericRepository<Rating> Ratings { get; }
 		IGenericRepository<Review> Reviews { get; }
+		
+
 
 	}
 }

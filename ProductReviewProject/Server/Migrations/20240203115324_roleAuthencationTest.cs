@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProductReviewProject.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class newdb : Migration
+    public partial class roleAuthencationTest : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -60,9 +60,9 @@ namespace ProductReviewProject.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CustomerEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Contact = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CustomerEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -136,9 +136,9 @@ namespace ProductReviewProject.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<int>(type: "int", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Price = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -155,9 +155,9 @@ namespace ProductReviewProject.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StaffEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Contact = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StaffEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -280,10 +280,10 @@ namespace ProductReviewProject.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Value = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: true),
-                    ProductId = table.Column<int>(type: "int", nullable: true),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -296,12 +296,14 @@ namespace ProductReviewProject.Server.Migrations
                         name: "FK_Ratings_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Ratings_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -310,9 +312,9 @@ namespace ProductReviewProject.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProductId = table.Column<int>(type: "int", nullable: true),
-                    CustomerId = table.Column<int>(type: "int", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -325,12 +327,14 @@ namespace ProductReviewProject.Server.Migrations
                         name: "FK_Reviews_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Reviews_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -345,15 +349,19 @@ namespace ProductReviewProject.Server.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "aa4e25be-cb1f-40b2-beb4-745ca9ce1f0a", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEDJEIlK+jOcC9TbCHud5puAoP91oSmn8Fbuln0a5DvTCX+Iou74OdSI3cojqPmRCBw==", null, false, "373ffb01-72a0-4ebe-9f65-70b64e36daf9", false, "admin@localhost.com" });
+                values: new object[,]
+                {
+                    { "2", 0, "ed68093e-d00a-4bff-b072-1c4a5b90cf4b", "user@localhost.com", false, "User", "User", false, null, "User@LOCALHOST.COM", "User@LOCALHOST.COM", "AQAAAAIAAYagAAAAEJ3CyfTRFJmeNuCO+2c0+PSG/qGYuihaFh1SXncmyK5PSwQzDP0hSlRGxARjcr0bXQ==", null, false, "39ba706b-1c8d-4457-93fb-d53c9ce336dd", false, "User@localhost.com" },
+                    { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "0c79369a-0740-41ac-96c9-6890c72e6078", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAECEzfimZi+NddCkGNQBT45Q7Ot3ye5rFcaYneqqI71LuHB8/aK/gkbrtBdIY5pEnpg==", null, false, "dcd529a2-b014-4084-9bfc-6524854b6ddf", false, "admin@localhost.com" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Customers",
                 columns: new[] { "Id", "Contact", "CreatedBy", "CustomerEmail", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "123456789", "System", "Product.com", new DateTime(2024, 1, 23, 15, 59, 41, 106, DateTimeKind.Local).AddTicks(3821), new DateTime(2024, 1, 23, 15, 59, 41, 106, DateTimeKind.Local).AddTicks(3829), "Customer1", "System" },
-                    { 2, "123456789", "System", "Product.com", new DateTime(2024, 1, 23, 15, 59, 41, 106, DateTimeKind.Local).AddTicks(3834), new DateTime(2024, 1, 23, 15, 59, 41, 106, DateTimeKind.Local).AddTicks(3835), "Customer2", "System" }
+                    { 1, "123456789", "System", "Product.com", new DateTime(2024, 2, 3, 19, 53, 24, 33, DateTimeKind.Local).AddTicks(8137), new DateTime(2024, 2, 3, 19, 53, 24, 33, DateTimeKind.Local).AddTicks(8146), "Customer1", "System" },
+                    { 2, "123456789", "System", "Product.com", new DateTime(2024, 2, 3, 19, 53, 24, 33, DateTimeKind.Local).AddTicks(8149), new DateTime(2024, 2, 3, 19, 53, 24, 33, DateTimeKind.Local).AddTicks(8149), "Customer2", "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -361,8 +369,8 @@ namespace ProductReviewProject.Server.Migrations
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Description", "Name", "Price", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "System", new DateTime(2024, 1, 23, 15, 59, 41, 103, DateTimeKind.Local).AddTicks(5488), new DateTime(2024, 1, 23, 15, 59, 41, 103, DateTimeKind.Local).AddTicks(5517), "Product1", "Product1", null, "System" },
-                    { 2, "System", new DateTime(2024, 1, 23, 15, 59, 41, 103, DateTimeKind.Local).AddTicks(5521), new DateTime(2024, 1, 23, 15, 59, 41, 103, DateTimeKind.Local).AddTicks(5522), "Product2", "Product2", null, "System" }
+                    { 1, "System", new DateTime(2024, 2, 3, 19, 53, 24, 32, DateTimeKind.Local).AddTicks(6093), new DateTime(2024, 2, 3, 19, 53, 24, 32, DateTimeKind.Local).AddTicks(6106), "Product1", "Product1", 1, "System" },
+                    { 2, "System", new DateTime(2024, 2, 3, 19, 53, 24, 32, DateTimeKind.Local).AddTicks(6109), new DateTime(2024, 2, 3, 19, 53, 24, 32, DateTimeKind.Local).AddTicks(6109), "Product2", "Product2", 2, "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -370,14 +378,18 @@ namespace ProductReviewProject.Server.Migrations
                 columns: new[] { "Id", "Contact", "CreatedBy", "DateCreated", "DateUpdated", "Name", "StaffEmail", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "123456789", "System", new DateTime(2024, 1, 23, 15, 59, 41, 109, DateTimeKind.Local).AddTicks(1366), new DateTime(2024, 1, 23, 15, 59, 41, 109, DateTimeKind.Local).AddTicks(1371), "Staff1", null, "System" },
-                    { 2, "123456789", "System", new DateTime(2024, 1, 23, 15, 59, 41, 109, DateTimeKind.Local).AddTicks(1375), new DateTime(2024, 1, 23, 15, 59, 41, 109, DateTimeKind.Local).AddTicks(1375), "Staff2", null, "System" }
+                    { 1, "123456789", "System", new DateTime(2024, 2, 3, 19, 53, 24, 34, DateTimeKind.Local).AddTicks(7474), new DateTime(2024, 2, 3, 19, 53, 24, 34, DateTimeKind.Local).AddTicks(7480), "Staff1", "Staff1.com", "System" },
+                    { 2, "123456789", "System", new DateTime(2024, 2, 3, 19, 53, 24, 34, DateTimeKind.Local).AddTicks(7482), new DateTime(2024, 2, 3, 19, 53, 24, 34, DateTimeKind.Local).AddTicks(7483), "Staff2", "Staff1.com", "System" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "3781efa7-66dc-47f0-860f-e506d04102e4" });
+                values: new object[,]
+                {
+                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "2" },
+                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "3781efa7-66dc-47f0-860f-e506d04102e4" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

@@ -1,6 +1,9 @@
 ﻿@page "/ratings/"
 @inject HttpClient _client
 @inject IJSRuntime js
+@inject NavigationManager navManager
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
 @attribute [Authorize]
 
 
@@ -75,6 +78,7 @@ else
 
 	protected async override Task OnInitializedAsync()
 	{
+		_interceptor.MonitorEvent();
 		Ratings = await _client.GetFromJsonAsync<List<Rating>>("api/ratings");
 	}
 
@@ -93,6 +97,11 @@ else
 				await OnInitializedAsync();
 			}
 		}
+	}
+
+	public void Dispose()
+	{
+		_interceptor.DisposeEvent();
 	}
 
 

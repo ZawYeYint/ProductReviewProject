@@ -23,14 +23,11 @@ namespace ProductReviewProject.Server.Repository
 		private IGenericRepository<Rating> _ratings;
 		private IGenericRepository<Review> _reviews;
 		
-		
-
-		private UserManager<ApplicationUser> _userManager;
+	
 
 		public UnitOfWork(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
 		{
 			_context = context;
-			_userManager = userManager;
 		}
 		public IGenericRepository<Product> Products
 			=> _products ??= new GenericRepository<Product>(_context);
@@ -42,7 +39,9 @@ namespace ProductReviewProject.Server.Repository
 			=> _ratings ??= new GenericRepository<Rating>(_context);
 		public IGenericRepository<Review> Reviews
 			=> _reviews ??= new GenericRepository<Review>(_context);
-	
+		
+
+
 
 		public void Dispose()
 		{

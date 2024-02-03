@@ -6,6 +6,8 @@ using ProductReviewProject.Server.Models;
 using Microsoft.AspNetCore.Identity;
 using ProductReviewProject.Server.IRepository;
 using ProductReviewProject.Server.Repository;
+using Microsoft.AspNetCore.Authorization;
+using ProductReviewProject.Client.Services;
 
 
 
@@ -19,14 +21,28 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	.EnableSensitiveDataLogging());
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
-	.AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+options.SignIn.RequireConfirmedAccount = false)
+.AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+
+
+
+//builder.Services.AddAuthorization(options =>
+//{
+//	options.AddPolicy("RequireAdministratorRole",
+//		 policy => policy.RequireRole("Administrator"));
+//});
+
+builder.Services.AddAuthentication()
+	.AddIdentityServerJwt();
 
 builder.Services.AddIdentityServer()
 	.AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
-builder.Services.AddAuthentication()
-	.AddIdentityServerJwt();
+
 
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
@@ -69,5 +85,18 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
+
+//using(var scope=app.Services.CreateScope())
+//{
+//	var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+//	var roles = new[] { "Admin", "Manager", "Member" };
+
+//	foreach(var role in roles)
+//	{
+//		if(!await roleManager.RoleExistsAsync(role))
+//			await roleManager.CreateAsync(new IdentityRole(role));
+
+//	}
+//}
 
 app.Run();

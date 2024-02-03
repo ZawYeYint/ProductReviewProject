@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,14 +13,16 @@ using ProductReviewProject.Shared.Domain;
 namespace ProductReviewProject.Server.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+	[Authorize(Policy = "RequireAdministratorRole")]
+	[ApiController]
     public class ProductsController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
         public ProductsController(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork;
+
+			_unitOfWork = unitOfWork;
         }
 
         // GET: api/Products
@@ -27,7 +30,7 @@ namespace ProductReviewProject.Server.Controllers
 		//public async Task<IActionResult<IEnumerable<Product>>> GetProducts()
 		public async Task<IActionResult> GetProducts()
 		{
-            var products = await _unitOfWork.Products.GetAll();
+			var products = await _unitOfWork.Products.GetAll();
             return Ok(products);
         }
 

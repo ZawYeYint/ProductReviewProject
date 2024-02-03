@@ -22,6 +22,18 @@ namespace ProductReviewProject.Server.Configurations.Entities
 				UserName = "admin@localhost.com",
 				NormalizedUserName = "ADMIN@LOCALHOST.COM",
 				PasswordHash = hasher.HashPassword(null, "P@ssword1")
+			},
+
+			new ApplicationUser
+			{
+				Id = "2",
+				Email = "user@localhost.com",
+				NormalizedEmail = "User@LOCALHOST.COM",
+				FirstName = "User",
+				LastName = "User",
+				UserName = "User@localhost.com",
+				NormalizedUserName = "User@LOCALHOST.COM",
+				PasswordHash = hasher.HashPassword(null, "P@ssword1")
 			}
 			);
 		}

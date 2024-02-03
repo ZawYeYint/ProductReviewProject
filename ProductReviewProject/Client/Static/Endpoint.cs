@@ -17,7 +17,7 @@ namespace ProductReviewProject.Client.Static
 		public static readonly string RatingsEndpoint = $"{Prefix}/ratings";
 		public static readonly string CustomersEndpoint = $"{Prefix}/customers";
 		public static readonly string StaffsEndpoint = $"{Prefix}/staffs";
-		public static readonly string UsersEndpoint = $"{Prefix}/UserManagement";
+		public static readonly string ApplicationUsersEndpoint = $"{Prefix}/applicationUsers";
 
 
 

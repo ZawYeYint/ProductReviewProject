@@ -1,6 +1,9 @@
 ﻿@page "/staffs"
 @inject HttpClient _client
 @inject IJSRuntime js
+@inject NavigationManager navManager
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
 @attribute [Authorize]
 
 
@@ -68,6 +71,7 @@ else
 
 	protected async override Task OnInitializedAsync()
 	{
+		_interceptor.MonitorEvent();
 		Staffs = await _client.GetFromJsonAsync<List<Staff>>($"{Endpoints.StaffsEndpoint}");
 	}
 
@@ -85,6 +89,11 @@ else
 				await OnInitializedAsync();
 			}
 		}
+	}
+
+	public void Dispose()
+	{
+		_interceptor.DisposeEvent();
 	}
 }
 

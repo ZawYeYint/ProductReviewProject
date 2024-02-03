@@ -24,7 +24,13 @@
 
 <h1>Welcome!</h1>
 
-Welcome to our Product Review App.
+<AuthorizeView Roles="User">
+	<p>You can only see this if you satisfy the IsUser policy.</p>
+</AuthorizeView>
+
+<AuthorizeView Roles="Admin">
+	<p>You can only see this if you satisfy the IsAdmin policy.</p>
+</AuthorizeView>
 <table>
 	<tr>
 		<th>CONTENT</th>
