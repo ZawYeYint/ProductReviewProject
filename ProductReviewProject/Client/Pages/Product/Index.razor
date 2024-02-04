@@ -32,7 +32,7 @@
 
 else
 {
-	<table class="table table-responsive">
+	<table class="table table-responsive"id="productsTable">
 		<thead>
 
 			<th>Name</th>
@@ -110,9 +110,14 @@ else
 		}
 	}
 
+	protected async override Task OnAfterRenderAsync(bool firstRender)
+	{
+		await js.InvokeVoidAsync("AddDataTable", "#productsTable");
+	}
+
 	public void Dispose()
 	{
-		_interceptor.DisposeEvent();
+		js.InvokeVoidAsync("DataTablesDispose", "#productsTable");
 	}
 }
 

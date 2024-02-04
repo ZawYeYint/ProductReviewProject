@@ -23,7 +23,7 @@
 
 else
 {
-	<table class="table table-responsive">
+	<table class="table table-responsive" id="reviewsTable">
 		<thead>
 
 		<th>Description</th>
@@ -93,9 +93,14 @@ else
 			}
 		}
 	}
+	protected async override Task OnAfterRenderAsync(bool firstRender)
+	{
+		await js.InvokeVoidAsync("AddDataTable", "#reviewsTable");
+	}
+
 	public void Dispose()
 	{
-		_interceptor.DisposeEvent();
+		js.InvokeVoidAsync("DataTablesDispose", "#reviewsTable");
 	}
 }
 

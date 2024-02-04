@@ -2,6 +2,7 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@implements IDisposable
 @attribute [Authorize]
 
 <h3 class="card-title">Customer Customers</h3>
@@ -20,7 +21,7 @@
 
 else
 {
-	<table class="table table-responsive">
+	<table class="table table-responsive"id="customersTable">
 		<thead>
 
 		<th>Name</th>
@@ -100,6 +101,19 @@ else
 				await OnInitializedAsync();
 			}
 		}
+	}
+
+
+
+
+	protected async override Task OnAfterRenderAsync(bool firstRender)
+	{
+		await js.InvokeVoidAsync("AddDataTable", "#customersTable");
+	}
+
+	public void Dispose()
+	{
+		js.InvokeVoidAsync("DataTablesDispose", "#customersTable");
 	}
 }
 
