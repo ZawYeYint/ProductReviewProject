@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using ProductReviewProject.Server.Data;
 using ProductReviewProject.Server.IRepository;
 using ProductReviewProject.Shared.Domain;
@@ -13,16 +13,15 @@ using ProductReviewProject.Shared.Domain;
 namespace ProductReviewProject.Server.Controllers
 {
     [Route("api/[controller]")]
-	[Authorize(Policy = "RequireAdministratorRole")]
-	[ApiController]
+    [ApiController]
+
     public class ProductsController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
         public ProductsController(IUnitOfWork unitOfWork)
         {
-
-			_unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: api/Products

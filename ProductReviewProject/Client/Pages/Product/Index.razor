@@ -4,8 +4,14 @@
 @inject NavigationManager navManager
 @inject HttpInterceptorService _interceptor
 @implements IDisposable
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
-@attribute [Authorize(Roles ="Administrator")]
+
+
+
+
+
+@attribute [Authorize]
 
 
 

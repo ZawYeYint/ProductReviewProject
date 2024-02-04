@@ -44,8 +44,11 @@ namespace ProductReviewProject.Server.Data
 			base.OnModelCreating(builder);
 			builder.ApplyConfiguration(new UserSeedConfiguration());
 
-			base.OnModelCreating(builder);
+		
+			
+		
 
-		}
+
+	}
 	}
 }

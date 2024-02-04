@@ -1,1 +1,97 @@
-﻿
+﻿@page "/applicationUsers"
+@inject HttpClient _client
+@inject IJSRuntime js
+@inject NavigationManager navManager
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
+@attribute [Authorize]
+
+<h3 class="card-title">ApplicationUser ApplicationUsers</h3>
+
+<a href="/applicationUsers/create" class="btn btn-secondary">
+	<span class="oi oi-plus"></span>
+	Create New ApplicationUser
+</a>
+<br />
+<br />
+
+@if (ApplicationUsers == null)
+{
+	<div class="alert alert-info">Loading Makes...</div>
+}
+
+else
+{
+	<table class="table table-responsive">
+		<thead>
+
+		<th>UserName</th>
+		<th>Email</th>
+		<th>PhoneNumber Created</th>
+		<th>Actions</th>
+
+		</thead>
+
+		<tbody>
+			@foreach (var applicationUser in ApplicationUsers)
+			{
+
+
+				<tr>
+					<td>@applicationUser.UserName</td>
+					<td>@applicationUser.Email</td>
+					<td>@applicationUser.PhoneNumber</td>
+
+					<td>
+
+						<a href="/applicationUsers/view/@applicationUser.Id" class="btn btn-primary">
+							<span class="oi oi-book"></span>
+						</a>
+
+						<a href="/applicationUsers/edit/@applicationUser.Id" class="btn btn-warning">
+							<span class="oi oi-pencil"></span>
+						</a>
+
+						@* <button class="btn btn-danger" @onclick="@(()=>Delete(applicationUser.Id))">
+							<span class="oi oi-delete"></span>
+
+				</button> *@
+					</td>
+
+				</tr>
+
+			}
+		</tbody>
+	</table>
+
+}
+<br />
+
+@code
+{
+
+	private List<AppUser>? ApplicationUsers;
+
+	protected async override Task OnInitializedAsync()
+	{
+		_interceptor.MonitorEvent();
+		try
+		{
+			ApplicationUsers = await _client.GetFromJsonAsync<List<AppUser>>($"{Endpoints.ApplicationUsersEndpoint}");
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Failed to fetch users: {ex.Message}");
+		}
+	}
+
+	public void Dispose()
+	{
+		_interceptor.DisposeEvent();
+	}
+
+}
+
+
+
+

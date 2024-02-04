@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProductReviewProject.Server.Data;
 
@@ -11,9 +12,11 @@ using ProductReviewProject.Server.Data;
 namespace ProductReviewProject.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240203122425_newRoleAuthen")]
+    partial class newRoleAuthen
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -401,7 +404,7 @@ namespace ProductReviewProject.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5505fb59-d3a3-48fa-97c3-cca7fb06e101",
+                            ConcurrencyStamp = "e25099d1-fcf0-49f1-926e-74fc0197748f",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -409,9 +412,9 @@ namespace ProductReviewProject.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEB4XszoBlyKbqOj1RBJaWoKGaX1qNaC3CwfaCPmDvfZWfYCUFNh1lAcGuDHJkanLAQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGqXnRitBfJk1y5H1FUEETwnF71b39f5Bz2qsJCNifpaEDMbYokJtzTYkcOKqGVq5w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3927757d-e05b-492e-95c0-5ddd97823322",
+                            SecurityStamp = "78a75608-0272-48c6-88d1-6bc7593d34e0",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -419,7 +422,7 @@ namespace ProductReviewProject.Server.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ec514be6-a486-48c7-b66b-ffad4f4a2920",
+                            ConcurrencyStamp = "9ad86803-8af9-4378-8958-fe33d10d618f",
                             Email = "user@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "User",
@@ -427,9 +430,9 @@ namespace ProductReviewProject.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "User@LOCALHOST.COM",
                             NormalizedUserName = "User@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKlfWX6SIbtvy0igj1jVdHwBp2hwUpYVkUtrGBU13EjYomKJ2lqRPNQ2Ej3DumDyOw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL57Wpp25q/CeuD7lwkG3RNWkfliGS3O9+7pH3Wa/SePFqK9Ql8n9GPsy5NmC3hKPw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7ad65ee3-617c-4f75-b569-18d767e43f34",
+                            SecurityStamp = "1e9a6355-af00-4553-b2e5-726323bc372a",
                             TwoFactorEnabled = false,
                             UserName = "User@localhost.com"
                         });
@@ -479,8 +482,8 @@ namespace ProductReviewProject.Server.Migrations
                             Contact = "123456789",
                             CreatedBy = "System",
                             CustomerEmail = "Product.com",
-                            DateCreated = new DateTime(2024, 2, 3, 21, 25, 39, 278, DateTimeKind.Local).AddTicks(8549),
-                            DateUpdated = new DateTime(2024, 2, 3, 21, 25, 39, 278, DateTimeKind.Local).AddTicks(8551),
+                            DateCreated = new DateTime(2024, 2, 3, 20, 24, 24, 810, DateTimeKind.Local).AddTicks(7942),
+                            DateUpdated = new DateTime(2024, 2, 3, 20, 24, 24, 810, DateTimeKind.Local).AddTicks(7948),
                             Name = "Customer1",
                             UpdatedBy = "System"
                         },
@@ -490,8 +493,8 @@ namespace ProductReviewProject.Server.Migrations
                             Contact = "123456789",
                             CreatedBy = "System",
                             CustomerEmail = "Product.com",
-                            DateCreated = new DateTime(2024, 2, 3, 21, 25, 39, 278, DateTimeKind.Local).AddTicks(8554),
-                            DateUpdated = new DateTime(2024, 2, 3, 21, 25, 39, 278, DateTimeKind.Local).AddTicks(8555),
+                            DateCreated = new DateTime(2024, 2, 3, 20, 24, 24, 810, DateTimeKind.Local).AddTicks(7950),
+                            DateUpdated = new DateTime(2024, 2, 3, 20, 24, 24, 810, DateTimeKind.Local).AddTicks(7950),
                             Name = "Customer2",
                             UpdatedBy = "System"
                         });
@@ -540,8 +543,8 @@ namespace ProductReviewProject.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 3, 21, 25, 39, 277, DateTimeKind.Local).AddTicks(9752),
-                            DateUpdated = new DateTime(2024, 2, 3, 21, 25, 39, 277, DateTimeKind.Local).AddTicks(9763),
+                            DateCreated = new DateTime(2024, 2, 3, 20, 24, 24, 809, DateTimeKind.Local).AddTicks(7422),
+                            DateUpdated = new DateTime(2024, 2, 3, 20, 24, 24, 809, DateTimeKind.Local).AddTicks(7432),
                             Description = "Product1",
                             Name = "Product1",
                             Price = 1,
@@ -551,8 +554,8 @@ namespace ProductReviewProject.Server.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 3, 21, 25, 39, 277, DateTimeKind.Local).AddTicks(9766),
-                            DateUpdated = new DateTime(2024, 2, 3, 21, 25, 39, 277, DateTimeKind.Local).AddTicks(9766),
+                            DateCreated = new DateTime(2024, 2, 3, 20, 24, 24, 809, DateTimeKind.Local).AddTicks(7434),
+                            DateUpdated = new DateTime(2024, 2, 3, 20, 24, 24, 809, DateTimeKind.Local).AddTicks(7435),
                             Description = "Product2",
                             Name = "Product2",
                             Price = 2,
@@ -690,8 +693,8 @@ namespace ProductReviewProject.Server.Migrations
                             Id = 1,
                             Contact = "123456789",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 3, 21, 25, 39, 279, DateTimeKind.Local).AddTicks(6219),
-                            DateUpdated = new DateTime(2024, 2, 3, 21, 25, 39, 279, DateTimeKind.Local).AddTicks(6221),
+                            DateCreated = new DateTime(2024, 2, 3, 20, 24, 24, 811, DateTimeKind.Local).AddTicks(6430),
+                            DateUpdated = new DateTime(2024, 2, 3, 20, 24, 24, 811, DateTimeKind.Local).AddTicks(6433),
                             Name = "Staff1",
                             StaffEmail = "Staff1.com",
                             UpdatedBy = "System"
@@ -701,8 +704,8 @@ namespace ProductReviewProject.Server.Migrations
                             Id = 2,
                             Contact = "123456789",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 3, 21, 25, 39, 279, DateTimeKind.Local).AddTicks(6225),
-                            DateUpdated = new DateTime(2024, 2, 3, 21, 25, 39, 279, DateTimeKind.Local).AddTicks(6225),
+                            DateCreated = new DateTime(2024, 2, 3, 20, 24, 24, 811, DateTimeKind.Local).AddTicks(6436),
+                            DateUpdated = new DateTime(2024, 2, 3, 20, 24, 24, 811, DateTimeKind.Local).AddTicks(6436),
                             Name = "Staff2",
                             StaffEmail = "Staff1.com",
                             UpdatedBy = "System"
